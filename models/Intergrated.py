@@ -97,13 +97,17 @@ class IntegratedModel:
         path = os.path.join(path, str(epoch))
         print('loading from epoch {}......'.format(epoch))
 
-        self.ae.load_state_dict(torch.load(os.path.join(path, 'ae.pth')
-                                                     ))
-        self.skel_enc.load_state_dict(torch.load(os.path.join(path, 'skel_enc.pth')
-                                                     ))
+        # Use map_location to handle CPU/CUDA compatibility
+        map_location = torch.device('cpu')
+        
+        self.ae.load_state_dict(torch.load(os.path.join(path, 'ae.pth'), 
+                                         map_location=map_location))
+        self.skel_enc.load_state_dict(torch.load(os.path.join(path, 'skel_enc.pth'),
+                                                map_location=map_location))
 
         if os.path.exists(os.path.join(path, 'discriminator.pth')):
-            self.discriminator.load_state_dict(torch.load(os.path.join(path, 'discriminator.pth')))
+            self.discriminator.load_state_dict(torch.load(os.path.join(path, 'discriminator.pth'),
+                                                         map_location=map_location))
         print('load succeed!')
 
     def train(self):
@@ -201,10 +205,10 @@ class IntegratedModel_Mixamo:
             self.load_network(self.auto_encoder, os.path.join(path, 'auto_encoder.pt'))
             self.load_network(self.static_encoder, os.path.join(path, 'static_encoder.pt'))
         else:
-            self.auto_encoder.load_state_dict(torch.load(os.path.join(path, 'auto_encoder.pt'),
-                                                         map_location=self.args.cuda_device))
-            self.static_encoder.load_state_dict(torch.load(os.path.join(path, 'static_encoder.pt'),
-                                                           map_location=self.args.cuda_device))
+                self.auto_encoder.load_state_dict(torch.load(os.path.join(path, 'auto_encoder.pt'),
+                                                             map_location=torch.device('cpu')))
+                self.static_encoder.load_state_dict(torch.load(os.path.join(path, 'static_encoder.pt'),
+                                                               map_location=torch.device('cpu')))
 
         print('load succeed!')
 
@@ -216,7 +220,7 @@ class IntegratedModel_Mixamo:
             namekey = k[7:]  # remove `module.`
             new_state_dict[namekey] = v
         # load params
-        network.load_state_dict(new_state_dict)
+            network.load_state_dict(new_state_dict, map_location=torch.device('cpu'))
         return network
 
     def DataParallel(self):
