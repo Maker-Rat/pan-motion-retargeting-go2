@@ -9,11 +9,11 @@ ROOT Hips
 		CHANNELS 3 Zrotation Yrotation Xrotation
 		JOINT Spine1
 		{
-			OFFSET 19.34000 0.000000 0.000000
+			OFFSET 38.68000 0.000000 0.000000
 			CHANNELS 3 Zrotation Yrotation Xrotation
 			JOINT Neck
 			{
-				OFFSET 19.340000 0.000000 0.000000
+				OFFSET 00.00000 0.000000 0.000000
 				CHANNELS 3 Zrotation Yrotation Xrotation
 				JOINT Head
 				{
@@ -27,7 +27,7 @@ ROOT Hips
 			}
 			JOINT LeftShoulder
 			{
-				OFFSET 19.340000 0.00000 14.2000
+				OFFSET 0.00000 0.00000 14.2000
 				CHANNELS 3 Zrotation Yrotation Xrotation
 				JOINT LeftArm
 				{
@@ -51,7 +51,7 @@ ROOT Hips
 			}
 			JOINT RightShoulder
 			{
-				OFFSET 19.340000 0.000000 -14.2000
+				OFFSET 0.00000 0.000000 -14.2000
 				CHANNELS 3 Zrotation Yrotation Xrotation
 				JOINT RightArm
 				{

@@ -12,7 +12,7 @@ from utils.utils import get_body_part
 from models.IK import remove_foot_sliding_humdog
 
 os.environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS_ID'
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+os.environ['CUDA_VISIBLE_DEVICES'] = ''  # Disable CUDA to avoid out of memory
 
 # load standard
 human_std = './data_preprocess/Lafan1_and_dog/std_bvh/hum_std.bvh'
@@ -40,7 +40,8 @@ def main():
     bvh_dir = './demo_dir/Lafan1'  # source motion directory for retargeting from human to dog skeletons
     save_dir = './pretrained_lafan1dog' # save dictory and also the used model dictory.
 
-    device = torch.device("cuda:0") if torch.cuda.is_available() else torch.device("cpu")
+    # Force CPU to avoid CUDA out of memory error
+    device = torch.device("cpu")
     para_path = os.path.join(save_dir, 'para.txt')
     with open(para_path, 'r') as para_file:
         argv_ = para_file.readline().split()[1:]
