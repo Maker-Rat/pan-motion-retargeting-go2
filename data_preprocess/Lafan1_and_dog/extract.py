@@ -30,7 +30,13 @@ def get_lafan1_set(bvh_dir, actors, choosen_list, window=64, offset=20):
     for file in bvh_files:
         if file.endswith('.bvh'):
             base_name = ntpath.basename(file[:-4])
-            seq_name, subject = base_name.split('_')
+            # Split on last underscore to handle motion names with underscores
+            parts = base_name.rsplit('_', 1)
+            if len(parts) == 2:
+                seq_name, subject = parts
+            else:
+                print(f'Warning: Skipping file with unexpected format: {file}')
+                continue
 
             if subject in actors and base_name in choosen_list:
                 print('Processing file {}'.format(file))
