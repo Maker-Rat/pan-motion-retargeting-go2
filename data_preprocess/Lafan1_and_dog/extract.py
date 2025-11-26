@@ -328,11 +328,7 @@ if __name__ == '__main__':
 
     data_dir = './data_preprocess/Lafan1_and_dog/Lafan1'
     # Updated for AMASS dataset subjects
-    actors = ['Female1General', 'Female1Gestures', 'Female1Running', 'Female1Walking',
-              'Male1General', 'Male1Running', 'Male1Walking', 
-              'Male2General', 'Male2MartialArtsExtended', 'Male2MartialArtsKicks',
-              'Male2MartialArtsPunches', 'Male2MartialArtsStances', 'Male2Running', 'Male2Walking',
-              'MartialArtsWalksTurns']
+    actors = ['subject1']
     with open('./data_preprocess/Lafan1_and_dog/lafan1_train.txt', 'r') as file:
         train_list = file.readlines()
         train_list = [line.strip() for line in train_list]
